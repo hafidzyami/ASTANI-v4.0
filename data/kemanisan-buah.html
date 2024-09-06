@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Cache-control" content="public">
+    <title>ASTANI - Kemanisan Buah</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <style>
+      :root {
+        --primary-color: #2c4144;
+        --secondary-color: #2c8760;
+        --orange-color: #fc8620;
+        --grey-nurse-color: #ccd1ca;
+        --secondary-blue-color: #60abfb;
+        --blue-light-color: #aee1fc;
+        --black-color: #000000;
+        --white-color: #ffffff;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        background-color: var(--white-color);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+        padding: 0;
+        color: var(--primary-color);
+      }
+
+      .title {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        color: var(--primary-color);
+        width: 100%;
+        padding: 0;
+        margin: 0; /* Tambahkan ini untuk menghilangkan margin */
+      }
+
+      .image-logo {
+        width: 8rem;
+        margin-right: 2rem;
+      }
+
+      .button-back {
+        padding: 0;
+        border: none;
+        border-radius: 60px;
+        cursor: pointer;
+        font-weight: bold;
+        margin-left: 2rem;
+      }
+
+      .container {
+        padding-top: 2rem;
+        width: 100%;
+        display: flex;
+      }
+
+      .container-1 {
+        width: 70%;
+        padding-left: 10%;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: start;
+      }
+      .container-2 {
+        width: 30%;
+        padding-right: 10%;
+      }
+
+      p {
+        font-size: large;
+        font-weight: bold;
+      }
+
+      .camera {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        background-color: #9b9b9b;
+        border-radius: 12px;
+        gap: 0;
+        color: var(--white-color);
+      }
+
+      .camera-text {
+        padding-bottom: 20px;
+      }
+
+      img {
+        width: 80%;
+        padding-top: 20px;
+      }
+
+      .lapor-form {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        margin-top: 2rem;
+      }
+
+      .error {
+        color: var(--orange-color);
+        margin-top: 1rem;
+        font-weight: bold;
+      }
+
+      .submit {
+        width: 100%;
+        padding: 1rem;
+        margin-top: 1rem;
+        background-color: var(--secondary-color);
+        color: var(--white-color);
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        font-weight: bold;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        font-size: 1rem;
+      }
+
+      .submit:hover {
+        background-color: var(--primary-color);
+      }
+
+      label {
+        align-self: flex-start;
+        margin-bottom: 0.5rem;
+        color: var(--primary-color);
+        font-weight: bold;
+      }
+
+      input {
+        font-family: Arial, sans-serif;
+        width: 100%;
+        padding: 0.75rem;
+        box-sizing: border-box;
+        margin-bottom: 1rem;
+        border: 1px solid var(--grey-nurse-color);
+        border-radius: 10px;
+      }
+
+      .hasil-analisis {
+        font-weight: normal;
+        display: none;
+        text-align: justify;
+      }
+      .no-analisis {
+        font-weight: normal;
+      }
+      .title-text {
+        flex-grow: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0; /* Tambahkan ini untuk menghilangkan padding */
+        margin: 0; /* Tambahkan ini untuk menghilangkan margin */
+      }
+
+      /* Tampilan Tab */
+      @media (min-width: 601px) and (max-width: 1025px) {
+        .lapor-form {
+          width: 80%;
+        }
+        .camera {
+          width: 80%;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .image-logo {
+          display: none;
+        }
+        .button-back:hover {
+          background-color: var(--primary-color);
+        }
+
+        .title {
+          position: relative;
+          font-size: small;
+        }
+        .button-back {
+          position: absolute;
+          height: 0;
+          bottom: 3.5rem;
+          border-radius: 100px;
+        }
+        .title-text {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding-left: 7rem;
+        }
+        h2 {
+          padding-right: 4.2rem;
+        }
+        .container {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+          justify-content: center;
+          align-items: center;
+          padding-top: 1rem;
+        }
+        .container-1 {
+          width: 90%;
+          padding-left: 10%;
+        }
+        .container-2 {
+          width: 70%;
+          padding-left: 5%;
+        }
+        .lapor-form {
+          width: 85%;
+          display: flex;
+          flex-direction: column;
+          margin-top: 2rem;
+        }
+        .camera {
+          width: 85%;
+        }
+
+        img {
+          width: 90%;
+          /* margin-bottom: 50px; */
+          /* padding-top: 50px; */
+        }
+        p {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="title">
+      <button onclick="window.location.href = 'home.html'" class="button-back">
+        <img src="arrow-back.png" alt="" srcset="" />
+      </button>
+      <div class="title-text">
+        <h2>Kemanisan Buah</h2>
+      </div>
+      <img src="logo_dark.png" alt="logo" class="image-logo" />
+    </div>
+    <div class="container">
+      <div class="container-1">
+        <p>Foto Brixmeter</p>
+        <button class="camera" id="cameraButton">
+          <img src="tambah-foto.png" alt="" id="cameraImage" />
+        </button>
+        <form id="laporForm" class="lapor-form">
+          <label for="angka-brixmeter">Angka Brixmeter</label>
+          <input
+            type="text"
+            id="angka-brixmeter"
+            name="angka-brixmeter"
+            required
+            placeholder="Angka Brixmeter..."
+          />
+          <button class="submit" type="submit">Cek</button>
+        </form>
+        <p id="error" class="error"></p>
+      </div>
+      <div class="container-2">
+        <p class="judul-analisis">Hasil</p>
+        <p class="no-analisis">-</p>
+        <p class="hasil-analisis">
+          Brix masih di bawah standar 10%, buah tidak di dalam masa panen.
+        </p>
+        <p class="judul-analisis">Rekomendasi</p>
+        <p class="no-analisis">-</p>
+        <p class="hasil-analisis">
+          Tambahkan kalium tabur sesuai dengan pembacaan rekomendasi pupuk dan
+          tambahkan KNO3 spray (2 minggu sekali mulai masa pembesaran buah
+          hingga panen).
+        </p>
+      </div>
+    </div>
+    <script>
+      document
+        .getElementById("cameraButton")
+        .addEventListener("click", function () {
+          this.style.backgroundColor = "white";
+          document.getElementById("cameraButton").style.height = "40%";
+          document.getElementById("cameraImage").src = "brix.png";
+          document.getElementById("cameraImage").style.width = "100%";
+          document.getElementById("cameraImage").style.height = "100%";
+          document.getElementById("cameraImage").style.paddingTop = "0px";
+          document.getElementById("cameraImage").style.marginBottom = "0px";
+          document.querySelector(".camera-text").style.display = "none";
+        });
+
+      document
+        .getElementById("laporForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          var angkaBrixmeter = document.getElementById("angka-brixmeter").value;
+          var noAnalisis = document.querySelectorAll(".no-analisis");
+          var judulAnalisis = document.querySelectorAll(".judul-analisis");
+          var hasilAnalisis = document.querySelectorAll(".hasil-analisis");
+
+          if (angkaBrixmeter !== "") {
+            // Ubah tampilan hasil-analisis dan no-analisis
+            noAnalisis.forEach(function (element) {
+              element.style.display = "none";
+            });
+            judulAnalisis.forEach(function (element) {
+              element.style.display = "block";
+            });
+            hasilAnalisis.forEach(function (element) {
+              element.style.display = "block";
+            });
+          } else {
+            document.getElementById("error").innerHTML =
+              "Mohon isi Angka Brixmeter";
+          }
+        });
+    </script>
+  </body>
+</html>

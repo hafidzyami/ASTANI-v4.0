@@ -1,0 +1,1361 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Cache-control" content="public">
+    <title>ASTANI - Cek Tanah</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <style>
+      :root {
+        --primary-color: #2c4144;
+        --secondary-color: #2c8760;
+        --orange-color: #fc8620;
+        --grey-nurse-color: #ccd1ca;
+        --secondary-blue-color: #60abfb;
+        --blue-light-color: #aee1fc;
+        --grey-200-color: #eeedf0;
+        --grey-300-color: #bfbfbf;
+        --black-color: #000000;
+        --white-color: #ffffff;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        height: 100vh;
+        margin: 0;
+        background-color: var(--white-color);
+      }
+
+      .cek-tanah-title {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        color: var(--primary-color);
+        width: 100%;
+        padding-top: 0.8rem;
+      }
+
+      h2 {
+        margin-left: 2rem;
+      }
+
+      .button-back {
+        padding: 10px;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        font-weight: bold;
+        margin-left: 2rem;
+      }
+
+      .button-back:hover {
+        background-color: var(--primary-color);
+      }
+
+      .image-logo {
+        width: 8rem;
+        margin-right: 2rem;
+      }
+
+      .cek-tanah-menu {
+        display: flex;
+        flex-direction: row;
+      }
+
+      .kondisi-tanah {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        margin-left: 2rem;
+        margin-top: 0.8rem;
+        width: 60%;
+      }
+
+      .right-side {
+        display: flex;
+        flex-direction: column;
+        width: 40%;
+        margin-top: 0.8rem;
+        margin-left: 2rem;
+        margin-right: 2rem;
+      }
+
+      .header {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+      }
+
+      .header h3 {
+        margin-bottom: 0rem;
+        margin-top: 0.8rem;
+      }
+
+      h4 {
+        margin-bottom: 1rem;
+        margin-top: 0.5rem;
+      }
+
+      h5 {
+        margin-bottom: 0.5rem;
+        font-weight: lighter;
+      }
+
+      .card h3,
+      .card h5 {
+        font-size: medium;
+        color: var(--white-color);
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+      }
+
+      .card h5 {
+        font-weight: bold;
+      }
+
+      .card-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        grid-gap: 1rem;
+        width: 100%;
+        margin-top: 1rem;
+      }
+
+      .card {
+        background: linear-gradient(
+          135deg,
+          var(--primary-color) 0%,
+          var(--secondary-color) 100%
+        );
+        color: var(--white-color);
+        border-radius: 10px;
+        padding: 2rem 0.5rem;
+        text-align: center;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .card::before {
+        content: "";
+        position: absolute;
+        width: 120px;
+        height: 100px;
+        background: var(--orange-color);
+        border-radius: 50%;
+        bottom: -50px;
+        left: -50px;
+        opacity: 0.3;
+      }
+
+      .card:hover {
+        background: linear-gradient(
+          135deg,
+          var(--secondary-color) 0%,
+          var(--primary-color) 100%
+        );
+        transform: translateY(-5px);
+      }
+
+      .card.double {
+        grid-column: span 2;
+      }
+
+      .usia-pohon,
+      .fase-pembuahan {
+        margin-bottom: 1rem;
+        border-radius: 10px;
+        padding-top: 1rem;
+        color: var(--primary-color);
+        font-weight: bold;
+      }
+
+      .fase-pembuahan {
+        margin-bottom: 3rem;
+      }
+
+      .usia-pohon select,
+      .fase-pembuahan select {
+        width: 100%;
+        padding: 0.5rem;
+        margin-top: 0.5rem;
+        font-size: 1rem;
+        border: 1px solid var(--grey-nurse-color);
+        border-radius: 5px;
+        background-color: var(--white-color);
+      }
+
+      .btn-rekomendasi {
+        padding: 1rem;
+        background-color: var(--secondary-color);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        margin-bottom: 1rem;
+      }
+
+      .btn-rekomendasi:hover {
+        background-color: var(--primary-color);
+      }
+
+      .hasil-rekomendasi {
+        margin-top: 1rem;
+        background-color: var(--grey-300-color);
+        color: var(--black-color);
+        padding: 0.4rem 1rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        font-size: large;
+      }
+
+      /* Media queries untuk tampilan mobile */
+      @media (max-width: 600px) {
+        .cek-tanah-title {
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+          width: 100%;
+          padding-top: 0.6rem;
+        }
+
+        .image-logo {
+          width: 7rem;
+          margin-right: 1rem;
+        }
+
+        h2 {
+          font-size: larger;
+        }
+
+        .cek-tanah-menu {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .kondisi-tanah {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin: 0.5rem 0rem;
+          width: 100%;
+        }
+
+        .header {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          width: 100%;
+        }
+
+        .header h3 {
+          margin-bottom: 0rem;
+          margin-top: 0.6rem;
+          display: flex;
+          align-items: start;
+          padding-left: 1rem;
+          justify-content: center;
+        }
+
+        .header h4 {
+          display: flex;
+          align-items: start;
+          padding-left: 1rem;
+          justify-content: center;
+        }
+
+        h4 {
+          margin-bottom: 1rem;
+          margin-top: 0.3rem;
+        }
+
+        h5 {
+          margin-bottom: 0.3rem;
+          font-weight: lighter;
+        }
+
+        .card h3,
+        .card h5 {
+          font-size: medium;
+          color: var(--white-color);
+          text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .card h5 {
+          font-weight: bold;
+        }
+
+        .card-container {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          grid-gap: 0.5rem;
+          width: 94%;
+          margin-top: 0.5rem;
+        }
+
+        .hasil-rekomendasi h5 {
+          font-weight: bold;
+          font-size: 16px;
+        }
+
+        .card {
+          background: linear-gradient(
+            135deg,
+            var(--primary-color) 0%,
+            var(--secondary-color) 100%
+          );
+          color: var(--white-color);
+          border-radius: 10px;
+          padding: 1rem 0.4rem;
+          text-align: center;
+          transition: background-color 0.3s ease, transform 0.3s ease;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          position: relative;
+          overflow: hidden;
+        }
+
+        .card::before {
+          content: "";
+          position: absolute;
+          width: 90px;
+          height: 90px;
+          background: var(--orange-color);
+          border-radius: 50%;
+          bottom: -50px;
+          left: -50px;
+          opacity: 0.3;
+        }
+
+        .card:hover {
+          background: linear-gradient(
+            135deg,
+            var(--secondary-color) 0%,
+            var(--primary-color) 100%
+          );
+          transform: translateY(-5px);
+        }
+
+        .card.double {
+          grid-column: span 3;
+        }
+
+        .button-back {
+          padding: 8px;
+          border: none;
+          border-radius: 60px;
+          cursor: pointer;
+          font-weight: bold;
+          margin-left: 1.5rem;
+        }
+
+        .right-side {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          width: 100%;
+          margin: 1rem 0;
+        }
+
+        .usia-pohon,
+        .fase-pembuahan {
+          margin-bottom: 0.4rem;
+          border-radius: 10px;
+          padding-top: 1rem;
+          color: var(--primary-color);
+          font-weight: bold;
+          width: 90%;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .fase-pembuahan {
+          margin-bottom: 3rem;
+        }
+
+        .usia-pohon select,
+        .fase-pembuahan select {
+          width: 100%;
+          padding: 0.5rem;
+          margin-top: 0.5rem;
+          font-size: 1rem;
+          border: 1px solid var(--grey-nurse-color);
+          border-radius: 5px;
+          background-color: var(--white-color);
+        }
+
+        .btn-rekomendasi {
+          padding: 1rem;
+          background-color: var(--secondary-color);
+          color: white;
+          border: none;
+          border-radius: 10px;
+          cursor: pointer;
+          font-weight: bold;
+          transition: background-color 0.3s ease, transform 0.3s ease;
+          margin-bottom: 1rem;
+          width: 90%;
+        }
+
+        .btn-rekomendasi:hover {
+          background-color: var(--primary-color);
+        }
+
+        .hasil-rekomendasi {
+          margin-top: 1rem;
+          background-color: var(--grey-300-color);
+          color: var(--black-color);
+          padding: 0.4rem 1rem;
+          border-radius: 10px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          width: 80%;
+          margin-bottom: 2rem;
+        }
+      }
+
+      @media (min-width: 600px) and (max-width: 1024px) {
+      }
+    </style>
+  </head>
+
+  <body id="cek-tanah-body">
+    <div class="cek-tanah-title">
+      <button onclick="window.location.href = 'home.html'" class="button-back">
+        <img src="arrow-back.png" alt="" srcset="" />
+      </button>
+      <h2>Cek Tanah</h2>
+      <img src="logo_dark.png" alt="logo" class="image-logo" />
+    </div>
+    <div class="cek-tanah-menu">
+      <div class="kondisi-tanah">
+        <div class="header">
+          <h3>Kondisi Tanah</h3>
+          <h4>
+            Pembaruan Terakhir:
+            <span id="lastUpdate">15 Juni 2024 18:30 WIB</span>
+          </h4>
+        </div>
+        <div class="card-container">
+          <div class="card">
+            <h3>Suhu</h3>
+            <h5 id="suhu">23°C</h5>
+          </div>
+          <div class="card">
+            <h3>Nitrogen (N)</h3>
+            <h5 id="nitrogen">23 mg/kg</h5>
+          </div>
+          <div class="card">
+            <h3>Potassium (K)</h3>
+            <h5 id="potassium">20 mg/kg</h5>
+          </div>
+          <div class="card">
+            <h3>Phosphorus (P)</h3>
+            <h5 id="phosphorus">150 mg/kg</h5>
+          </div>
+          <div class="card">
+            <h3>PH</h3>
+            <h5 id="ph">7</h5>
+          </div>
+          <div class="card">
+            <h3>Unsur Hara</h3>
+            <h5 id="ec">1.2 dS/m</h5>
+          </div>
+          <div class="card double">
+            <h3>Kondisi Air Dalam Tanah</h3>
+            <h5 id="vwc">30%</h5>
+          </div>
+        </div>
+      </div>
+      <div class="right-side">
+        <div class="usia-pohon">
+          Usia Pohon
+          <select id="usiaPohon">
+            <option value="0-2.5 tahun">0-2.5 tahun</option>
+            <option value="2.6-4 tahun">2.6-4 tahun</option>
+            <option value="4-7 tahun">4-7 tahun</option>
+            <option value="7-10 tahun">7-10 tahun</option>
+            <option value="10+ tahun">10+ tahun</option>
+          </select>
+        </div>
+        <div class="fase-pembuahan">
+          Fase Pembuahan
+          <select id="fasePembuahan">
+            <option value="Vegetatif">Vegetatif</option>
+            <option value="Berbunga">Berbunga</option>
+            <option value="Pengisian/Pembesaran Buah">
+              Pengisian/Pembesaran Buah
+            </option>
+            <option value="Pematangan Buah">Pematangan Buah</option>
+          </select>
+        </div>
+        <button class="btn-rekomendasi" onclick="getRekomendasi()">
+          Rekomendasi
+        </button>
+        <div class="hasil-rekomendasi" id="hasilRekomendasi">
+          <h4>Hasil Rekomendasi:</h4>
+          <h5 id="hasilRekomendasiText"></h5>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+    <script>
+      async function fetchData() {
+        try {
+          const [suhu, nitrogen, phosphorus, potassium, ph, ec, vwc] =
+            await Promise.all([
+              fetch("/soiltemp").then((response) => response.text()),
+              fetch("/nitrogen").then((response) => response.text()),
+              fetch("/phosphorous").then((response) => response.text()),
+              fetch("/potassium").then((response) => response.text()),
+              fetch("/ph").then((response) => response.text()),
+              fetch("/ec").then((response) => response.text()),
+              fetch("/vwc").then((response) => response.text()),
+            ]);
+
+          document.getElementById("suhu").innerText = suhu + "°C";
+          document.getElementById("nitrogen").innerText = nitrogen + " mg/kg";
+          document.getElementById("phosphorus").innerText =
+            phosphorus + " mg/kg";
+          document.getElementById("potassium").innerText = potassium + " mg/kg";
+          document.getElementById("ph").innerText = ph;
+          document.getElementById("ec").innerText = ec + " dS/m";
+          document.getElementById("vwc").innerText = vwc + "%";
+
+          const now = new Date();
+          const formattedDate = `${now.getDate()} ${now.toLocaleString(
+            "default",
+            { month: "long" }
+          )} ${now.getFullYear()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()} WIB`;
+          document.getElementById("lastUpdate").innerText = formattedDate;
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      }
+
+      let composition_npk_jeruk = [
+        {
+          id: 1,
+          usia: "0-2.5 tahun",
+          fase_pembuahan: "Vegetatif",
+          composition_N: 40,
+          composition_P: 40,
+          composition_K: 20,
+        },
+        {
+          id: 2,
+          usia: "2.6-4 tahun",
+          fase_pembuahan: "Vegetatif",
+          composition_N: 30,
+          composition_P: 35,
+          composition_K: 35,
+        },
+        {
+          id: 3,
+          usia: "4-7 tahun",
+          fase_pembuahan: "Berbunga",
+          composition_N: 25,
+          composition_P: 45,
+          composition_K: 30,
+        },
+        {
+          id: 4,
+          usia: "4-7 tahun",
+          fase_pembuahan: "Pengisian/Pembesaran Buah",
+          composition_N: 20,
+          composition_P: 40,
+          composition_K: 40,
+        },
+        {
+          id: 5,
+          usia: "4-7 tahun",
+          fase_pembuahan: "Pematangan Buah",
+          composition_N: 15,
+          composition_P: 30,
+          composition_K: 55,
+        },
+        {
+          id: 6,
+          usia: "7-10 tahun",
+          fase_pembuahan: "Berbunga",
+          composition_N: 25,
+          composition_P: 45,
+          composition_K: 30,
+        },
+        {
+          id: 7,
+          usia: "7-10 tahun",
+          fase_pembuahan: "Pengisian/Pembesaran Buah",
+          composition_N: 20,
+          composition_P: 40,
+          composition_K: 40,
+        },
+        {
+          id: 8,
+          usia: "7-10 tahun",
+          fase_pembuahan: "Pematangan Buah",
+          composition_N: 15,
+          composition_P: 30,
+          composition_K: 55,
+        },
+        {
+          id: 9,
+          usia: "10+ tahun",
+          fase_pembuahan: "Berbunga",
+          composition_N: 25,
+          composition_P: 45,
+          composition_K: 30,
+        },
+        {
+          id: 10,
+          usia: "10+ tahun",
+          fase_pembuahan: "Pengisian/Pembesaran Buah",
+          composition_N: 20,
+          composition_P: 40,
+          composition_K: 40,
+        },
+        {
+          id: 11,
+          usia: "10+ tahun",
+          fase_pembuahan: "Pematangan Buah",
+          composition_N: 15,
+          composition_P: 30,
+          composition_K: 55,
+        },
+      ];
+
+      let npk_states_jeruk = [
+        {
+          id: 1,
+          usia: "0-2.5 tahun",
+          fase_pembuahan: "Vegetatif",
+          keterangan: "Sangat Kurang",
+          lower_bound_N: 0,
+          upper_bound_N: 15.9,
+          lower_bound_P: 0,
+          upper_bound_P: 15.9,
+          lower_bound_K: 0,
+          upper_bound_K: 12.4,
+        },
+        {
+          id: 2,
+          usia: "0-2.5 tahun",
+          fase_pembuahan: "Vegetatif",
+          keterangan: "Kurang",
+          lower_bound_N: 16,
+          upper_bound_N: 17.9,
+          lower_bound_P: 16,
+          upper_bound_P: 17.9,
+          lower_bound_K: 12.5,
+          upper_bound_K: 13.9,
+        },
+        {
+          id: 3,
+          usia: "0-2.5 tahun",
+          fase_pembuahan: "Vegetatif",
+          keterangan: "Cukup",
+          lower_bound_N: 18,
+          upper_bound_N: 20,
+          lower_bound_P: 18,
+          upper_bound_P: 20,
+          lower_bound_K: 14,
+          upper_bound_K: 14.5,
+        },
+        {
+          id: 4,
+          usia: "0-2.5 tahun",
+          fase_pembuahan: "Vegetatif",
+          keterangan: "Berlebih",
+          lower_bound_N: 20.1,
+          upper_bound_N: 100,
+          lower_bound_P: 20.1,
+          upper_bound_P: 100,
+          lower_bound_K: 14.6,
+          upper_bound_K: 100,
+        },
+        {
+          id: 5,
+          usia: "2.6-4 tahun",
+          fase_pembuahan: "Vegetatif",
+          keterangan: "Sangat Kurang",
+          lower_bound_N: 0,
+          upper_bound_N: 15.9,
+          lower_bound_P: 0,
+          upper_bound_P: 15,
+          lower_bound_K: 0,
+          upper_bound_K: 15,
+        },
+        {
+          id: 6,
+          usia: "2.6-4 tahun",
+          fase_pembuahan: "Vegetatif",
+          keterangan: "Kurang",
+          lower_bound_N: 16,
+          upper_bound_N: 16.4,
+          lower_bound_P: 15.1,
+          upper_bound_P: 17.4,
+          lower_bound_K: 15.1,
+          upper_bound_K: 17.4,
+        },
+        {
+          id: 7,
+          usia: "2.6-4 tahun",
+          fase_pembuahan: "Vegetatif",
+          keterangan: "Cukup",
+          lower_bound_N: 16.5,
+          upper_bound_N: 16.9,
+          lower_bound_P: 17.5,
+          upper_bound_P: 18,
+          lower_bound_K: 17.5,
+          upper_bound_K: 18,
+        },
+        {
+          id: 8,
+          usia: "2.6-4 tahun",
+          fase_pembuahan: "Vegetatif",
+          keterangan: "Berlebih",
+          lower_bound_N: 17,
+          upper_bound_N: 100,
+          lower_bound_P: 18.1,
+          upper_bound_P: 100,
+          lower_bound_K: 18.1,
+          upper_bound_K: 100,
+        },
+        {
+          id: 9,
+          usia: "4-7 tahun",
+          fase_pembuahan: "Berbunga",
+          keterangan: "Sangat Kurang",
+          lower_bound_N: 0,
+          upper_bound_N: 13.1,
+          lower_bound_P: 0,
+          upper_bound_P: 17,
+          lower_bound_K: 0,
+          upper_bound_K: 15.9,
+        },
+        {
+          id: 10,
+          usia: "4-7 tahun",
+          fase_pembuahan: "Berbunga",
+          keterangan: "Kurang",
+          lower_bound_N: 13.2,
+          upper_bound_N: 15.3,
+          lower_bound_P: 17.1,
+          upper_bound_P: 19.4,
+          lower_bound_K: 16,
+          upper_bound_K: 16.4,
+        },
+        {
+          id: 11,
+          usia: "4-7 tahun",
+          fase_pembuahan: "Berbunga",
+          keterangan: "Cukup",
+          lower_bound_N: 15.4,
+          upper_bound_N: 15.7,
+          lower_bound_P: 19.5,
+          upper_bound_P: 20.5,
+          lower_bound_K: 16.5,
+          upper_bound_K: 16.9,
+        },
+        {
+          id: 12,
+          usia: "4-7 tahun",
+          fase_pembuahan: "Berbunga",
+          keterangan: "Berlebih",
+          lower_bound_N: 15.8,
+          upper_bound_N: 100,
+          lower_bound_P: 20.6,
+          upper_bound_P: 100,
+          lower_bound_K: 17,
+          upper_bound_K: 100,
+        },
+        {
+          id: 13,
+          usia: "4-7 tahun",
+          fase_pembuahan: "Pengisian/Pembesaran Buah",
+          keterangan: "Sangat Kurang",
+          lower_bound_N: 0,
+          upper_bound_N: 12.4,
+          lower_bound_P: 0,
+          upper_bound_P: 15.9,
+          lower_bound_K: 0,
+          upper_bound_K: 15.9,
+        },
+        {
+          id: 14,
+          usia: "4-7 tahun",
+          fase_pembuahan: "Pengisian/Pembesaran Buah",
+          keterangan: "Kurang",
+          lower_bound_N: 12.5,
+          upper_bound_N: 13.9,
+          lower_bound_P: 16,
+          upper_bound_P: 17.9,
+          lower_bound_K: 16,
+          upper_bound_K: 17.9,
+        },
+        {
+          id: 15,
+          usia: "4-7 tahun",
+          fase_pembuahan: "Pengisian/Pembesaran Buah",
+          keterangan: "Cukup",
+          lower_bound_N: 14,
+          upper_bound_N: 14.5,
+          lower_bound_P: 18,
+          upper_bound_P: 20,
+          lower_bound_K: 18,
+          upper_bound_K: 20,
+        },
+        {
+          id: 16,
+          usia: "4-7 tahun",
+          fase_pembuahan: "Pengisian/Pembesaran Buah",
+          keterangan: "Berlebih",
+          lower_bound_N: 14.6,
+          upper_bound_N: 100,
+          lower_bound_P: 20.1,
+          upper_bound_P: 100,
+          lower_bound_K: 20.1,
+          upper_bound_K: 100,
+        },
+        {
+          id: 17,
+          usia: "4-7 tahun",
+          fase_pembuahan: "Pematangan Buah",
+          keterangan: "Sangat Kurang",
+          lower_bound_N: 0,
+          upper_bound_N: 2,
+          lower_bound_P: 0,
+          upper_bound_P: 15.9,
+          lower_bound_K: 0,
+          upper_bound_K: 8.9,
+        },
+        {
+          id: 18,
+          usia: "4-7 tahun",
+          fase_pembuahan: "Pematangan Buah",
+          keterangan: "Kurang",
+          lower_bound_N: 2.1,
+          upper_bound_N: 3.1,
+          lower_bound_P: 16,
+          upper_bound_P: 16.4,
+          lower_bound_K: 9,
+          upper_bound_K: 11.9,
+        },
+        {
+          id: 19,
+          usia: "4-7 tahun",
+          fase_pembuahan: "Pematangan Buah",
+          keterangan: "Cukup",
+          lower_bound_N: 3.2,
+          upper_bound_N: 3.5,
+          lower_bound_P: 16.5,
+          upper_bound_P: 16.9,
+          lower_bound_K: 12,
+          upper_bound_K: 12.5,
+        },
+        {
+          id: 20,
+          usia: "4-7 tahun",
+          fase_pembuahan: "Pematangan Buah",
+          keterangan: "Berlebih",
+          lower_bound_N: 3.6,
+          upper_bound_N: 100,
+          lower_bound_P: 17,
+          upper_bound_P: 100,
+          lower_bound_K: 12.6,
+          upper_bound_K: 100,
+        },
+        {
+          id: 21,
+          usia: "7-10 tahun",
+          fase_pembuahan: "Berbunga",
+          keterangan: "Sangat Kurang",
+          lower_bound_N: 0,
+          upper_bound_N: 14.6,
+          lower_bound_P: 0,
+          upper_bound_P: 18.5,
+          lower_bound_K: 0,
+          upper_bound_K: 17.4,
+        },
+        {
+          id: 22,
+          usia: "7-10 tahun",
+          fase_pembuahan: "Berbunga",
+          keterangan: "Kurang",
+          lower_bound_N: 14.7,
+          upper_bound_N: 16.8,
+          lower_bound_P: 18.6,
+          upper_bound_P: 20.9,
+          lower_bound_K: 17.5,
+          upper_bound_K: 17.9,
+        },
+        {
+          id: 23,
+          usia: "7-10 tahun",
+          fase_pembuahan: "Berbunga",
+          keterangan: "Cukup",
+          lower_bound_N: 16.9,
+          upper_bound_N: 17.2,
+          lower_bound_P: 21,
+          upper_bound_P: 22,
+          lower_bound_K: 18,
+          upper_bound_K: 18.4,
+        },
+        {
+          id: 24,
+          usia: "7-10 tahun",
+          fase_pembuahan: "Berbunga",
+          keterangan: "Berlebih",
+          lower_bound_N: 17.3,
+          upper_bound_N: 100,
+          lower_bound_P: 22.1,
+          upper_bound_P: 100,
+          lower_bound_K: 18.5,
+          upper_bound_K: 100,
+        },
+        {
+          id: 25,
+          usia: "7-10 tahun",
+          fase_pembuahan: "Pengisian/Pembesaran Buah",
+          keterangan: "Sangat Kurang",
+          lower_bound_N: 0,
+          upper_bound_N: 13.9,
+          lower_bound_P: 0,
+          upper_bound_P: 17.4,
+          lower_bound_K: 0,
+          upper_bound_K: 17.4,
+        },
+        {
+          id: 26,
+          usia: "7-10 tahun",
+          fase_pembuahan: "Pengisian/Pembesaran Buah",
+          keterangan: "Kurang",
+          lower_bound_N: 14,
+          upper_bound_N: 15.4,
+          lower_bound_P: 17.5,
+          upper_bound_P: 19.4,
+          lower_bound_K: 17.5,
+          upper_bound_K: 19.4,
+        },
+        {
+          id: 27,
+          usia: "7-10 tahun",
+          fase_pembuahan: "Pengisian/Pembesaran Buah",
+          keterangan: "Cukup",
+          lower_bound_N: 15.5,
+          upper_bound_N: 16,
+          lower_bound_P: 19.5,
+          upper_bound_P: 21.5,
+          lower_bound_K: 19.5,
+          upper_bound_K: 21.5,
+        },
+        {
+          id: 28,
+          usia: "7-10 tahun",
+          fase_pembuahan: "Pengisian/Pembesaran Buah",
+          keterangan: "Berlebih",
+          lower_bound_N: 16.1,
+          upper_bound_N: 100,
+          lower_bound_P: 21.6,
+          upper_bound_P: 100,
+          lower_bound_K: 21.6,
+          upper_bound_K: 100,
+        },
+        {
+          id: 29,
+          usia: "7-10 tahun",
+          fase_pembuahan: "Pematangan Buah",
+          keterangan: "Sangat Kurang",
+          lower_bound_N: 0,
+          upper_bound_N: 3.5,
+          lower_bound_P: 0,
+          upper_bound_P: 17.4,
+          lower_bound_K: 0,
+          upper_bound_K: 10.4,
+        },
+        {
+          id: 30,
+          usia: "7-10 tahun",
+          fase_pembuahan: "Pematangan Buah",
+          keterangan: "Kurang",
+          lower_bound_N: 3.6,
+          upper_bound_N: 4.6,
+          lower_bound_P: 17.5,
+          upper_bound_P: 17.9,
+          lower_bound_K: 10.5,
+          upper_bound_K: 13.4,
+        },
+        {
+          id: 31,
+          usia: "7-10 tahun",
+          fase_pembuahan: "Pematangan Buah",
+          keterangan: "Cukup",
+          lower_bound_N: 4.7,
+          upper_bound_N: 5,
+          lower_bound_P: 18,
+          upper_bound_P: 18.4,
+          lower_bound_K: 13.5,
+          upper_bound_K: 14,
+        },
+        {
+          id: 32,
+          usia: "7-10 tahun",
+          fase_pembuahan: "Pematangan Buah",
+          keterangan: "Berlebih",
+          lower_bound_N: 5.1,
+          upper_bound_N: 100,
+          lower_bound_P: 18.5,
+          upper_bound_P: 100,
+          lower_bound_K: 14.1,
+          upper_bound_K: 100,
+        },
+        {
+          id: 33,
+          usia: "10+ tahun",
+          fase_pembuahan: "Berbunga",
+          keterangan: "Sangat Kurang",
+          lower_bound_N: 0,
+          upper_bound_N: 16.1,
+          lower_bound_P: 0,
+          upper_bound_P: 15.4,
+          lower_bound_K: 0,
+          upper_bound_K: 5,
+        },
+        {
+          id: 34,
+          usia: "10+ tahun",
+          fase_pembuahan: "Berbunga",
+          keterangan: "Kurang",
+          lower_bound_N: 16.2,
+          upper_bound_N: 18.3,
+          lower_bound_P: 15.5,
+          upper_bound_P: 16.9,
+          lower_bound_K: 5.1,
+          upper_bound_K: 6.1,
+        },
+        {
+          id: 35,
+          usia: "10+ tahun",
+          fase_pembuahan: "Berbunga",
+          keterangan: "Cukup",
+          lower_bound_N: 18.4,
+          upper_bound_N: 18.7,
+          lower_bound_P: 17,
+          upper_bound_P: 17.5,
+          lower_bound_K: 6.2,
+          upper_bound_K: 6.5,
+        },
+        {
+          id: 36,
+          usia: "10+ tahun",
+          fase_pembuahan: "Berbunga",
+          keterangan: "Berlebih",
+          lower_bound_N: 18.8,
+          upper_bound_N: 100,
+          lower_bound_P: 17.6,
+          upper_bound_P: 100,
+          lower_bound_K: 6.6,
+          upper_bound_K: 100,
+        },
+        {
+          id: 37,
+          usia: "10+ tahun",
+          fase_pembuahan: "Pengisian/Pembesaran Buah",
+          keterangan: "Sangat Kurang",
+          lower_bound_N: 0,
+          upper_bound_N: 20,
+          lower_bound_P: 0,
+          upper_bound_P: 18.9,
+          lower_bound_K: 0,
+          upper_bound_K: 18.9,
+        },
+        {
+          id: 38,
+          usia: "10+ tahun",
+          fase_pembuahan: "Pengisian/Pembesaran Buah",
+          keterangan: "Kurang",
+          lower_bound_N: 20.1,
+          upper_bound_N: 22.4,
+          lower_bound_P: 19,
+          upper_bound_P: 20.9,
+          lower_bound_K: 19,
+          upper_bound_K: 19.4,
+        },
+        {
+          id: 39,
+          usia: "10+ tahun",
+          fase_pembuahan: "Pengisian/Pembesaran Buah",
+          keterangan: "Cukup",
+          lower_bound_N: 22.5,
+          upper_bound_N: 23.5,
+          lower_bound_P: 21,
+          upper_bound_P: 23,
+          lower_bound_K: 19.5,
+          upper_bound_K: 19.9,
+        },
+        {
+          id: 40,
+          usia: "10+ tahun",
+          fase_pembuahan: "Pengisian/Pembesaran Buah",
+          keterangan: "Berlebih",
+          lower_bound_N: 23.6,
+          upper_bound_N: 100,
+          lower_bound_P: 23.1,
+          upper_bound_P: 100,
+          lower_bound_K: 20,
+          upper_bound_K: 100,
+        },
+        {
+          id: 41,
+          usia: "10+ tahun",
+          fase_pembuahan: "Pematangan Buah",
+          keterangan: "Sangat Kurang",
+          lower_bound_N: 0,
+          upper_bound_N: 18.9,
+          lower_bound_P: 0,
+          upper_bound_P: 18.9,
+          lower_bound_K: 0,
+          upper_bound_K: 11.9,
+        },
+        {
+          id: 42,
+          usia: "10+ tahun",
+          fase_pembuahan: "Pematangan Buah",
+          keterangan: "Kurang",
+          lower_bound_N: 19,
+          upper_bound_N: 19.4,
+          lower_bound_P: 19,
+          upper_bound_P: 20.9,
+          lower_bound_K: 12,
+          upper_bound_K: 14.9,
+        },
+        {
+          id: 43,
+          usia: "10+ tahun",
+          fase_pembuahan: "Pematangan Buah",
+          keterangan: "Cukup",
+          lower_bound_N: 19.5,
+          upper_bound_N: 19.9,
+          lower_bound_P: 21,
+          upper_bound_P: 23,
+          lower_bound_K: 15,
+          upper_bound_K: 15.5,
+        },
+        {
+          id: 44,
+          usia: "10+ tahun",
+          fase_pembuahan: "Pematangan Buah",
+          keterangan: "Berlebih",
+          lower_bound_N: 20,
+          upper_bound_N: 100,
+          lower_bound_P: 23.1,
+          upper_bound_P: 100,
+          lower_bound_K: 15.6,
+          upper_bound_K: 100,
+        },
+      ];
+
+      let composition_ph_jeruk = [
+        {
+          id: 1,
+          lower_bound: 0,
+          upper_bound: 2.9,
+          rekomendasi: "Perlu penambahan Kapur Tanaman sebanyak 2,5 ton/ha",
+          rekomendasi_kapur: 2.5,
+        },
+        {
+          id: 2,
+          lower_bound: 3,
+          upper_bound: 4.9,
+          rekomendasi: "Perlu penambahan Kapur Tanaman sebanyak 1,5 ton/ha",
+          rekomendasi_kapur: 1.5,
+        },
+        {
+          id: 3,
+          lower_bound: 5,
+          upper_bound: 6.5,
+          rekomendasi: "Sudah Cukup",
+          rekomendasi_kapur: 0,
+        },
+        {
+          id: 4,
+          lower_bound: 6.6,
+          upper_bound: 8,
+          rekomendasi: "Perlu penambahan Kapur Tanaman sebanyak 1 ton/ha",
+          rekomendasi_kapur: 1,
+        },
+        {
+          id: 5,
+          lower_bound: 8.1,
+          upper_bound: 10,
+          rekomendasi: "Perlu penambahan Kapur Tanaman sebanyak 2 ton/ha",
+          rekomendasi_kapur: 2,
+        },
+        {
+          id: 6,
+          lower_bound: 10.1,
+          upper_bound: 14,
+          rekomendasi: "Perlu penambahan Kapur Tanaman sebanyak 2.5 ton/ha",
+          rekomendasi_kapur: 2.5,
+        },
+      ];
+
+      function recommender(
+        curr_N,
+        curr_P,
+        curr_K,
+        pupuk_N,
+        pupuk_P,
+        pupuk_K,
+        ph,
+        usia_pohon,
+        fase
+      ) {
+        if (curr_N === undefined) {
+          curr_N = 0;
+        }
+        if (curr_P === undefined) {
+          curr_P = 0;
+        }
+        if (curr_K === undefined) {
+          curr_K = 0;
+        }
+
+        let compo_N = 0,
+          compo_P = 0,
+          compo_K = 0;
+
+        composition_npk_jeruk.forEach(function (state) {
+          if (usia_pohon === state.usia && fase === state.fase_pembuahan) {
+            compo_N = state.composition_N;
+            compo_P = state.composition_P;
+            compo_K = state.composition_K;
+          }
+        });
+        let keterangan_N = "",
+          keterangan_P = "",
+          keterangan_K = "";
+        let ideal_N = 0,
+          ideal_P = 0,
+          ideal_K = 0;
+        npk_states_jeruk.forEach(function (state) {
+          if (usia_pohon === state.usia && fase == state.fase_pembuahan) {
+            if (
+              curr_N <= state.upper_bound_N &&
+              curr_N >= state.lower_bound_N
+            ) {
+              keterangan_N = state.keterangan;
+            }
+            if (
+              curr_P <= state.upper_bound_P &&
+              curr_P >= state.lower_bound_P
+            ) {
+              keterangan_P = state.keterangan;
+            }
+            if (
+              curr_K <= state.upper_bound_K &&
+              curr_K >= state.lower_bound_K
+            ) {
+              keterangan_K = state.keterangan;
+            }
+          }
+          if (usia_pohon === state.usia && state.keterangan == "Cukup") {
+            ideal_N = state.lower_bound_N;
+            ideal_P = state.lower_bound_P;
+            ideal_K = state.lower_bound_K;
+          }
+        });
+        let needs_N = 0,
+          needs_P = 0,
+          needs_K = 0;
+        if (keterangan_N == "Sangat Kurang" || keterangan_N == "Kurang") {
+          needs_N = ideal_N - curr_N;
+        }
+        if (keterangan_P == "Sangat Kurang" || keterangan_P == "Kurang") {
+          needs_P = ideal_P - curr_P;
+        }
+        if (keterangan_K == "Sangat Kurang" || keterangan_N == "Kurang") {
+          needs_K = ideal_K - curr_K;
+        }
+        let rekomendasi_ph = "";
+        let needs_kapur = 0;
+        npk_states_jeruk.forEach(function (state) {
+          if (ph <= state.upper_bound && ph >= state.lower_bound) {
+            rekomendasi_ph = state.rekomendasi;
+            needs_kapur = state.rekomendasi_kapur;
+          }
+        });
+        let add_N =
+          ((needs_N * (pupuk_N / 100)) / 7.065) * (compo_N / 100) * 1000;
+        let add_P =
+          ((needs_P * (pupuk_P / 100)) / 7.065) * (compo_P / 100) * 0.43 * 1000;
+        let add_K =
+          ((needs_K * (pupuk_K / 100)) / 7.065) * (compo_K / 100) * 0.83 * 1000;
+
+        return [add_N, add_P, add_K, needs_kapur];
+      }
+
+      function getRekomendasi() {
+        // Get the values from the HTML elements
+        let curr_N = parseFloat(
+          document.getElementById("nitrogen").innerText
+        );
+        let curr_P = parseFloat(
+          document.getElementById("phosphorus").innerText
+        );
+        let curr_K = parseFloat(
+          document.getElementById("potassium").innerText
+        );
+
+        const pupuk_N = 15; // Placeholder values for fertilizer composition
+        const pupuk_P = 15;
+        const pupuk_K = 15;
+        let ph = parseFloat(document.getElementById("ph").innerText);
+        let usia_pohon = document.getElementById("usiaPohon").value;
+        let fase = document.getElementById("fasePembuahan").value;
+
+        console.log(curr_N, curr_P, curr_K, pupuk_N, pupuk_P, pupuk_K, ph, usia_pohon, fase);
+
+        // Call the recommender function
+        const rekomendasi = recommender(
+          curr_N,
+          curr_P,
+          curr_K,
+          pupuk_N,
+          pupuk_P,
+          pupuk_K,
+          ph,
+          usia_pohon,
+          fase
+        );
+        const rekomendasiDumy = recommender(
+          0,
+          0,
+          0,
+          15,
+          15,
+          15,
+          8,
+          "10+ tahun",
+          "Pematangan Buah"
+        )
+
+        console.log("rekomendasi:", rekomendasi)
+        console.log("rekomendasi Dummy:", rekomendasiDumy)
+
+        // Display the recommendation results
+        document.getElementById(
+          "hasilRekomendasiText"
+        ).innerText = `Tambahan Nitrogen (N): ${rekomendasi[0].toFixed(2)} g, 
+        Tambahan Phosphorus (P): ${rekomendasi[1].toFixed(2)} g, 
+        Tambahan Potassium (K): ${rekomendasi[2].toFixed(2)} g, 
+        Kebutuhan Kapur: ${rekomendasi[3]} kg`;
+      }
+
+      fetchData();
+      setInterval(fetchData, 1000); // Update data every 1 second
+    </script>
+  </body>
+</html>

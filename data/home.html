@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Cache-control" content="public">
+    <title>ASTANI - Beranda</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <script src="script.js"></script>
+    <style>
+      :root {
+        --primary-color: #2c4144;
+        --secondary-color: #2c8760;
+        --orange-color: #fc8620;
+        --grey-nurse-color: #ccd1ca;
+        --secondary-blue-color: #60abfb;
+        --blue-light-color: #aee1fc;
+        --black-color: #000000;
+        --white-color: #ffffff;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        height: 100vh;
+        margin: 0;
+        background-color: var(--white-color);
+        margin-top: 0.4rem;
+      }
+
+      .home-title {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        color: var(--primary-color);
+        width: 100%;
+      }
+
+      h2 {
+        margin-right: 2rem;
+      }
+
+      button {
+        padding: 10px;
+        background-color: var(--secondary-color);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+        margin-right: 2rem;
+      }
+
+      button:hover {
+        background-color: var(--orange-color);
+      }
+
+      .home-menu {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin-top: 0.8rem;
+      }
+
+      .home-row-one {
+        display: flex;
+        flex-direction: row;
+        width: 95%;
+      }
+
+      .card {
+        margin: 1rem;
+        background: linear-gradient(
+          135deg,
+          var(--primary-color),
+          var(--secondary-color)
+        );
+        color: var(--white-color);
+        font-size: x-large;
+        padding: 2.5rem 2rem;
+        flex: 1;
+        text-align: center;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: bold;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .card::before {
+        content: "";
+        position: absolute;
+        top: -50px;
+        left: -50px;
+        width: 100px;
+        height: 100px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        z-index: 0;
+      }
+
+      .card::after {
+        content: "";
+        position: absolute;
+        bottom: -50px;
+        right: -50px;
+        width: 100px;
+        height: 100px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        z-index: 0;
+      }
+
+      .card:hover {
+        background: linear-gradient(
+          135deg,
+          var(--secondary-color),
+          var(--primary-color)
+        );
+        transform: translateY(-6px);
+      }
+
+      .card * {
+        position: relative; /* Memastikan konten kartu tetap di atas ornamen */
+        z-index: 1;
+      }
+
+      .home-row-two {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 95%;
+      }
+
+      .icon {
+        width: 4rem;
+      }
+
+      .image-logo {
+        width: 8rem;
+        margin-left: 2rem;
+      }
+
+      /* Media queries untuk tampilan mobile */
+      @media (max-width: 600px) {
+        .home-title {
+          flex-direction: row;
+          justify-content: space-between;
+          padding-top: 0.5rem;
+        }
+
+        h2 {
+          font-size: large;
+          margin-right: 1rem;
+        }
+
+        button {
+          margin-right: 1rem;
+          font-size: 12px;
+        }
+
+        .image-logo {
+          width: 6rem;
+          margin-left: 1rem;
+        }
+
+        .home-menu {
+          margin-top: 0.5rem;
+        }
+
+        .home-row-one {
+          flex-direction: column;
+        }
+
+        .icon {
+          width: 3.7rem;
+        }
+
+        .home-row-two {
+          flex-direction: row;
+        }
+
+        .card {
+          font-size: large;
+          padding: 1.5rem 1rem;
+          gap: 1rem;
+          margin: 0.5rem 0.5rem;
+        }
+      }
+
+      @media (min-width: 600px) and (max-width: 1024px) {
+      }
+    </style>
+  </head>
+  <body id="home-body">
+    <div class="home-title">
+      <img src="logo_dark.png" alt="logo" class="image-logo" />
+      <h2>ASTANI</h2>
+      <button id="logoutButton">Keluar Akun</button>
+    </div>
+
+    <div class="home-menu">
+      <div class="home-row-one">
+        <a href="cek-tanah.html" class="card"
+          ><img src="cek-tanah.png" alt="tanah-img" class="icon" />Cek Tanah</a
+        >
+        <a href="cuaca.html" class="card"
+          ><img src="cek-cuaca.png" alt="cuaca-img" class="icon" />Cek Cuaca</a
+        >
+        <a href="lapor.html" class="card"
+          ><img src="lapor.png" alt="lapor-img" class="icon" />Lapor</a
+        >
+      </div>
+      <div class="home-row-two">
+        <a href="mikroskop.html" class="card"
+          ><img src="mikroskop.png" alt="" class="icon" />Mikroskop</a
+        >
+        <a href="kemanisan-buah.html" class="card"
+          ><img
+            src="kemanisan-buah.png"
+            alt="kemanisan-buah-img"
+            class="icon"
+          />Kemanisan Buah</a
+        >
+      </div>
+    </div>
+  </body>
+</html>

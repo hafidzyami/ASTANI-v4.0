@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Cache-control" content="public">
+  <title>ASTANI - Lapor Aktivitas</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <style>
+    :root {
+      --primary-color: #2c4144;
+      --secondary-color: #2c8760;
+      --orange-color: #fc8620;
+      --grey-nurse-color: #ccd1ca;
+      --secondary-blue-color: #60abfb;
+      --blue-light-color: #aee1fc;
+      --black-color: #000000;
+      --white-color: #ffffff;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: var(--white-color);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      color: var(--primary-color);
+    }
+
+    label {
+      align-self: flex-start;
+      margin-bottom: 0.5rem;
+      color: var(--primary-color);
+      font-weight: bold;
+    }
+
+    input,
+    textarea {
+      font-family: Arial, sans-serif;
+      width: 100%;
+      padding: 0.75rem;
+      box-sizing: border-box;
+      margin-bottom: 1rem;
+      border: 1px solid var(--grey-nurse-color);
+      border-radius: 10px;
+    }
+
+    .lapor-aktivitas-title {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--primary-color);
+      width: 100%;
+      padding-top: 0.8rem;
+    }
+
+    .button-back {
+      padding: 10px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-left: 2rem;
+    }
+
+    .image-logo {
+      width: 8rem;
+      margin-right: 2rem;
+    }
+
+    .pilih-aktivitas {
+      margin-bottom: 0.4rem;
+      border-radius: 10px;
+      padding-top: 1rem;
+      color: var(--primary-color);
+      font-weight: bold;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pilih-aktivitas select {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 0.5rem;
+      font-size: 1rem;
+      border: 1px solid var(--grey-nurse-color);
+      border-radius: 10px;
+      background-color: var(--white-color);
+    }
+
+    .submit {
+      width: 100%;
+      padding: 1rem;
+      margin-top: 1rem;
+      background-color: var(--secondary-color);
+      color: var(--white-color);
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      font-weight: bold;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      font-size: 1rem;
+    }
+
+    .submit:hover {
+      background-color: var(--primary-color);
+    }
+
+    .camera {
+      width: 420px;
+      height: 250px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      padding: 0px;
+      background-color: #9b9b9b;
+      border-radius: 12px;
+      gap: 0;
+    }
+
+    .cameraImage {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    .container {
+      padding-top: 3rem;
+      width: 90%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .button-camera {
+      margin-top: 1rem;
+      padding: 1rem 3rem;
+      background-color: var(--secondary-color);
+      color: var(--white-color);
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .button-camera:hover {
+      background-color: var(--primary-color);
+    }
+
+    .lapor-form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-left: 4rem;
+    }
+
+    .error {
+      color: var(--orange-color);
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+
+    p {
+      font-size: 1.2rem;
+      color: var(--white-color);
+    }
+
+    /* Tampilan Tab */
+    @media (min-width: 601px) and (max-width: 1025px) {
+      .cameraContainer {
+        width: 100%;
+      }
+
+      .camera {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        background-color: #9b9b9b;
+        border-radius: 12px;
+      }
+
+      .container {
+        padding-top: 1rem;
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 32px;
+      }
+
+      .lapor-form {
+        margin-left: 0;
+      }
+
+      .button-container {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+
+      .button-camera {
+        margin-top: 1rem;
+        padding: 1rem 4rem;
+        background-color: var(--secondary-color);
+        color: var(--white-color);
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+      }
+    }
+
+    /* Tampilan Mobile */
+    @media (max-width: 600px) {
+      .lapor-aktivitas-title {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding-top: 0.6rem;
+      }
+
+      .container {
+        padding-top: 1rem;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+      }
+
+      .lapor-form {
+        margin-left: 0rem;
+      }
+
+      h2 {
+        font-size: larger;
+      }
+
+      .image-logo {
+        width: 7rem;
+        margin-right: 1rem;
+      }
+
+      .camera {
+        width: 100%;
+        height: 300px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        padding: 0px;
+        background-color: #9b9b9b;
+        border-radius: 12px;
+        gap: 0;
+      }
+
+      .cameraImage {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 12px;
+      }
+
+      .button-camera {
+        margin-top: 1rem;
+        padding: 1rem 1.5rem;
+      }
+
+      .button-camera {
+        margin-top: 1rem;
+        padding: 1rem 2rem;
+        background-color: var(--secondary-color);
+        color: var(--white-color);
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+      }
+
+      .container {
+        padding-top: 1rem;
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+      }
+
+      p {
+        font-size: 1rem;
+        color: var(--white-color);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="lapor-aktivitas-title">
+    <button onclick="window.location.href = 'lapor.html'" class="button-back">
+      <img src="arrow-back.png" alt="" srcset="" />
+    </button>
+    <h2>Lapor Aktivitas</h2>
+    <img src="logo_dark.png" alt="logo" class="image-logo" />
+  </div>
+  <div class="container">
+    <div id="cameraContainer" class="cameraContainer">
+      <div class="camera" id="camera">
+        <img src="tambah-foto.png" alt="" id="cameraImage" class="cameraImage" />
+      </div>
+      <div class="button-container">
+        <button id="buttonCamera" class="button-camera" onclick="openCamera()">
+          Buka Kamera
+        </button>
+        <button id="captureImage" class="button-camera" onclick="captureImage()">
+          Tangkap Gambar
+        </button>
+      </div>
+    </div>
+    <form id="laporForm" class="lapor-form" onsubmit="submitForm(event)">
+      <div class="pilih-aktivitas">
+        Pilih Aktivitas
+        <select id="aktivitas">
+          <option value="Pasang Perangkap Hama">Pasang Perangkap Hama</option>
+          <option value="Penjarangan">Penjarangan</option>
+          <option value="Pemangkasan">Pemangkasan</option>
+          <option value="Penyiangan Gulma">Penyiangan Gulma</option>
+        </select>
+      </div>
+      <br />
+      <label for="keterangan">Keterangan</label>
+      <textarea name="keterangan" id="keterangan" placeholder="Tambahkan Keterangan..." rows="12"></textarea>
+      <button class="submit" type="submit">Lapor</button>
+    </form>
+    <p id="error" class="error"></p>
+  </div>
+  <script>
+    let isCameraOpen = false;
+    async function startStream() {
+      try {
+        const response = await fetch('/start_stream');
+        if (!response.ok) {
+          throw new Error('Failed to start stream');
+        }
+      } catch (error) {
+        console.error('Error starting stream:', error);
+      }
+    }
+
+    async function stopStream() {
+      try {
+        const response = await fetch('/stop_stream');
+        if (!response.ok) {
+          throw new Error('Failed to stop stream');
+        }
+      } catch (error) {
+        console.error('Error stopping stream:', error);
+      }
+    }
+
+    async function openCamera() {
+      await startStream();
+      const cameraImage = document.getElementById("cameraImage");
+      cameraImage.src = "/stream";
+      cameraImage.style.transform = "rotate(-90deg)";
+      cameraImage.style.width = "70%";
+      cameraImage.style.height = "100%";
+      const buttonCamera = document.getElementById("buttonCamera");
+      buttonCamera.textContent = "Tutup Kamera";
+      buttonCamera.onclick = closeCamera;
+      isCameraOpen = true;
+    }
+
+    async function closeCamera() {
+      window.stop();
+      await stopStream();
+      const cameraImage = document.getElementById("cameraImage");
+      cameraImage.src = "tambah-foto.png";
+      cameraImage.style.transform = "rotate(0deg)";
+      cameraImage.style.width = "100%";
+      cameraImage.style.height = "100%";
+      const buttonCamera = document.getElementById("buttonCamera");
+      buttonCamera.textContent = "Buka Kamera";
+      buttonCamera.onclick = openCamera;
+      isCameraOpen = false;
+    }
+
+    function captureImage() {
+      if (!isCameraOpen) {
+        alert("Buka Kamera Dahulu");
+        return;
+      }
+      window.stop();
+      const cameraImage = document.getElementById("cameraImage");
+      cameraImage.src = "/capture?_cb=" + Date.now();
+      alert("Berhasil Menangkap Gambar");
+    }
+
+    function submitForm(event) {
+      event.preventDefault();
+      const pilihAktivitas = document.getElementById("aktivitas").value;
+      const keterangan = document.getElementById("keterangan").value;
+      const fileName = `${pilihAktivitas}_${keterangan}.jpg`;
+      const cameraImage = document.getElementById("cameraImage");
+
+      // Create a canvas to draw the image
+      const canvas = document.createElement("canvas");
+      const context = canvas.getContext("2d");
+      canvas.width = 1600;
+      canvas.height = 1200;
+      context.drawImage(cameraImage, 0, 0, canvas.width, canvas.height);
+
+      // Convert canvas to data URL
+      const dataURL = canvas.toDataURL("image/jpeg");
+
+      // Create a download link
+      const link = document.createElement("a");
+      link.href = dataURL;
+      link.download = fileName;
+      link.style.display = "none";
+
+      // Append the link to the body
+      document.body.appendChild(link);
+
+      // Trigger the download
+      link.click();
+
+      // Remove the link after download
+      document.body.removeChild(link);
+
+      alert("Laporan berhasil disimpan ke perangkat");
+    }
+  </script>
+</body>
+
+</html>

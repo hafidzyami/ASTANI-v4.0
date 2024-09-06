@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Cache-control" content="public">
+    <title>ASTANI - Lapor</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <style>
+      :root {
+        --primary-color: #2c4144;
+        --secondary-color: #2c8760;
+        --orange-color: #fc8620;
+        --grey-nurse-color: #ccd1ca;
+        --secondary-blue-color: #60abfb;
+        --blue-light-color: #aee1fc;
+        --black-color: #000000;
+        --white-color: #ffffff;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        background-color: var(--white-color);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0;
+        color: var(--primary-color);
+      }
+
+      .icon {
+        height: 80px;
+      }
+
+      .lapor-title {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        color: var(--primary-color);
+        width: 100%;
+        padding-top: 0.8rem;
+      }
+
+      .button-back {
+        padding: 10px;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        font-weight: bold;
+        margin-left: 2rem;
+      }
+
+      h2 {
+        margin-left: 2rem;
+      }
+
+      .image-logo {
+        width: 8rem;
+        margin-right: 2rem;
+      }
+      .container {
+        display: flex;
+        width: 90%;
+        justify-content: space-between;
+        gap: 60px;
+      }
+      .card {
+        width: 100%;
+        margin-top: 40px;
+        height: fit-content;
+        padding-left: 80px;
+        padding-top: 30px;
+        padding-bottom: 30px;
+        display: flex;
+        align-items: center;
+        border-radius: 12px;
+        text-decoration: none;
+      }
+      .lapor-hama {
+        background-color: var(--primary-color);
+        color: var(--white-color);
+      }
+      .lapor-pemupukan {
+        background-color: var(--secondary-color);
+        color: var(--white-color);
+      }
+      .lapor-penyemprotan {
+        background-color: var(--orange-color);
+        color: var(--white-color);
+      }
+      .lapor-aktivitas {
+        background-color: var(--grey-nurse-color);
+        color: var(--black-color);
+      }
+      .text-wrapper {
+        padding-left: 40px;
+      }
+      /* Tampilan Tab */
+      @media (min-width: 601px) and (max-width: 1025px) {
+        .container {
+          width: 80%;
+          display: flex;
+          flex-direction: column;
+          justify-content: start;
+          align-items: center;
+          gap: 0;
+        }
+
+        .container-2 {
+          padding-bottom: 2rem;
+        }
+      }
+      /* Tampilan Mobile */
+      @media (max-width: 600px) {
+        .lapor-title {
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+          width: 100%;
+          padding-top: 0.6rem;
+        }
+        .icon {
+          height: 3.5rem;
+          margin-left: 2rem;
+        }
+        h2 {
+          font-size: larger;
+        }
+
+        .image-logo {
+          width: 7rem;
+          margin-right: 1rem;
+        }
+        .container {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          gap: 0rem;
+          justify-content: center;
+          align-items: center;
+        }
+        .card {
+          height: fit-content;
+          padding-left: 1rem;
+          padding-top: 1rem;
+          padding-bottom: 1rem;
+          margin-top: 1.5rem;
+          display: flex;
+          align-items: center;
+          border-radius: 12px;
+          text-decoration: none;
+          font-size: smaller;
+          width: 90%;
+        }
+        .text-wrapper {
+          padding-left: 28px;
+          font-size: medium;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="lapor-title">
+      <button onclick="window.location.href = 'home.html'" class="button-back">
+        <img src="arrow-back.png" alt="" srcset="" />
+      </button>
+      <h2>Lapor</h2>
+      <img src="logo_dark.png" alt="logo" class="image-logo" />
+    </div>
+    <div class="container">
+      <a href="lapor-hama.html" class="card lapor-hama">
+        <img src="hama.png" alt="Lapor Hama" class="icon" />
+        <div class="text-wrapper">
+          <h3>Laporkan</h3>
+          <h3>Hama Terlihat</h3>
+        </div>
+      </a>
+      <a href="lapor-pemupukan.html" class="card lapor-pemupukan">
+        <img src="pupuk.png" alt="Lapor Pemupukan" class="icon" />
+        <div class="text-wrapper">
+          <h3>Laporkan</h3>
+          <h3>Pemupukan</h3>
+        </div>
+      </a>
+    </div>
+    <div class="container container-2">
+      <a href="lapor-penyemprotan.html" class="card lapor-penyemprotan">
+        <img src="pestisida.png" alt="Lapor Penyemprotan" class="icon" />
+        <div class="text-wrapper">
+          <h3>Laporkan</h3>
+          <h3>Penyemprotan</h3>
+        </div>
+      </a>
+      <a href="lapor-aktivitas.html" class="card lapor-aktivitas">
+        <img src="aktivitas.png" alt="Lapor Aktivitas" class="icon" />
+        <div class="text-wrapper">
+          <h3>Laporkan</h3>
+          <h3>Aktivitas</h3>
+        </div>
+      </a>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Cache-control" content="public">
+  <title>ASTANI - Masuk</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <style>
+    :root {
+      --primary-color: #2c4144;
+      --secondary-color: #2c8760;
+      --orange-color: #fc8620;
+      --grey-nurse-color: #ccd1ca;
+      --secondary-blue-color: #60abfb;
+      --blue-light-color: #aee1fc;
+      --black-color: #000000;
+      --white-color: #ffffff;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: var(--primary-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .login-container {
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 30%;
+      background-color: var(--white-color);
+      padding: 2rem;
+    }
+
+    .image-logo {
+      height: 3.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .login-title {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    h2 {
+      margin-top: 2rem;
+      margin-bottom: 0.5rem;
+      color: var(--primary-color);
+      align-items: start;
+    }
+
+    .divider {
+      width: 100%;
+      height: 1px;
+      background-color: var(--grey-nurse-color);
+      margin-bottom: 1.5rem;
+    }
+
+    .login-form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    label {
+      align-self: flex-start;
+      margin-bottom: 0.5rem;
+      color: var(--primary-color);
+      font-weight: bold;
+    }
+
+    .input-container {
+      position: relative;
+      width: 100%;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.75rem;
+      box-sizing: border-box;
+      margin-bottom: 1rem;
+      border: 1px solid var(--grey-nurse-color);
+      border-radius: 10px;
+    }
+
+    button {
+      width: 100%;
+      padding: 1rem;
+      margin-top: 1rem;
+      background-color: var(--secondary-color);
+      color: var(--white-color);
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      font-weight: bold;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      font-size: 1rem;
+    }
+
+    button:hover {
+      background-color: var(--primary-color);
+    }
+
+    .error {
+      color: var(--orange-color);
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .login-container {
+        width: 75%;
+        padding: 1.2rem;
+      }
+
+      .image-logo {
+        height: 2.5rem;
+        padding-bottom: 0rem;
+      }
+
+      .login-title {
+        margin-top: 0rem;
+        padding-top: 0rem;
+      }
+
+      h2 {
+        font-size: 1.2rem;
+      }
+
+      label {
+        font-size: 0.8rem;
+      }
+
+      button {
+        font-size: 1rem;
+      }
+
+      .error {
+        font-size: 0.8rem;
+      }
+    }
+
+    @media only screen and (min-width: 600px) and (max-width: 1024px) {
+      .login-container {
+        width: 55%;
+        padding: 2rem;
+      }
+    }
+  </style>
+  </body id="index-body">
+</head>
+
+<body>
+  <div class="login-container">
+    <img src="logo_dark.png" alt="Agrari" class="image-logo" />
+    <div class="login-title">
+      <h2>Masuk Akun Astani</h2>
+      <div class="divider"></div>
+    </div>
+
+    <form id="loginForm" class="login-form">
+      <label for="username">Nama Pengguna</label>
+      <input type="text" id="username" name="username" required placeholder="Nama Petani" />
+      <label for="password">Kata Sandi</label>
+      <div class="input-container">
+        <input type="password" id="password" name="password" required placeholder="••••••••" />
+        <span onclick="togglePasswordVisibility()"></span>
+      </div>
+      <button type="submit">Masuk</button>
+    </form>
+    <p id="error" class="error"></p>
+  </div>
+</body>
+<script src="script.js"></script>
+
+</html>
